@@ -1,0 +1,23 @@
+extends layout
+
+block head
+	-string title = "Регистрация";
+
+block contents	
+	form(method="POST", action="/register")
+		div
+			label(for="login") Логин:
+			input#login(name="login", type="text")
+		div
+			label(for="name") Имя:
+			input#name(name="name", type="text")
+		div
+			label(for="pwd") Пароль:
+			input#pwd(name="pwd", type="password")
+		div
+			label(for="pwd2") Повторите пароль:
+			input#pwd2(name="pwd2", type="password")
+		-if(_error.length)
+			p.error= _error
+		div
+			button(type="submit") Создать

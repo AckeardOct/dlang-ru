@@ -1,0 +1,12 @@
+extends layout
+
+block head
+	-string title = ui.name;
+
+block contents	
+	-if(ui.admin)
+		<a href="/admin">Администрирование</a>
+	ul
+		li Имя: #{ui.name}
+		li Логин: #{ui.login}
+		li Права: #{ui.rights}

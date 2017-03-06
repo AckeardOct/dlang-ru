@@ -1,0 +1,17 @@
+extends layout
+
+block head
+	-string title = "Вход";
+
+block contents		
+	form(method="POST", action="/login")
+		div
+			label(for="login") Login:
+			input#login(name="login", type="text")
+		div
+			label(for="password") Пароль:
+			input#password(name="password", type="password")
+		-if(_error.length)
+			p.error= _error
+		div
+			button(type="submit") Вход

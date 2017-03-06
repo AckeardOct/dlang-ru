@@ -1,0 +1,7 @@
+{
+	"_id" : ObjectId("58b209db27029adbb85e946c"),
+	"login" : "admin",
+	"name" : "Админ",
+	"rights" : "admin",
+	"pwd" : "21232f297a57a5a743894a0e4a801fc3"	
+}

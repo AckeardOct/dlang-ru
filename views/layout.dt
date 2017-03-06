@@ -1,0 +1,18 @@
+doctype html
+html
+	head
+		block head
+			-string title = "Layout";
+		title #{title} : Dlang
+	body
+		ul
+			li <a href="/">Главная</a>
+			li <a href="/user">#{ui.name}</a>
+			-if(ui.logined)
+				li <a href="/logout">Выход</a>
+			-else
+				li <a href="/register">Регистрация</a>
+		hr
+		h1 #{title}
+		block contents
+
