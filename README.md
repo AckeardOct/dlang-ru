@@ -6,7 +6,7 @@
   <li>$ git clone https://github.com/AckeardOct/dlang-ru.git </li>
   <li>
   $ cd dlang-ru/db <br> 
-  $ ./restart-db.sh #Это вернёт базу данных в минимальное состояние
+  $ ./restart-db.sh #Это вернёт базу данных в минимальное состояние <br>
   $ cd ../
     </li> 
   <li> $ dub </li>
