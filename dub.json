@@ -7,7 +7,7 @@
 	"dependencies": {
 		"vibe-d": "~>0.7.30"
 	},
-	"description": "web site for disciples of D",
+	"description": "Web site for disciples of D",
 	"copyright": "Copyright @ 2017, Ackeard Oct",
 	"license": "GPL"
 }

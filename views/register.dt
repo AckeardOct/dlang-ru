@@ -12,6 +12,9 @@ block contents
 			label(for="name") Имя:
 			input#name(name="name", type="text")
 		div
+			label(for="mail") Почта:
+			input#mail(name="mail", type="text")
+		div
 			label(for="pwd") Пароль:
 			input#pwd(name="pwd", type="password")
 		div

@@ -18,7 +18,7 @@ class DataBase
         } catch {
             writeln("[ERROR] Can't connect to MongoDb by ip: ", _ip);
             exit(1);
-        } 
+        }
     }
     
     Bson getUser(immutable string _login)
@@ -26,22 +26,42 @@ class DataBase
         Bson req = Bson.emptyObject;
         req["login"] = _login.toLower();
         return usersColl.findOne(req);
-    }     
+    }
+    
+    Bson getUser(BsonObjectID _id)
+    {
+        Bson req = Bson.emptyObject;
+        req["_id"] = _id;
+        return usersColl.findOne(req);
+    }
     
     bool hasUser(immutable string _login)
     {
         return !getUser(_login).isNull;
     }
     
-    Bson createUser(immutable string _login, immutable string _name, immutable string _pwd)
+    Bson createUser(immutable string _login, immutable string _name, immutable string _mail, immutable string _pwd)
     {
         Bson newUser = Bson.emptyObject;
-        newUser["login"] = _login.toLower();
-        newUser["name"]  = _name;
+        newUser["login"]  = _login.toLower();
+        newUser["name"]   = _name;
         newUser["rights"] = "user";
-        newUser["pwd"] = toHexString(md5Of(_pwd)).toLower();
-        usersColl.insert(newUser);
+        newUser["auth"]   = false;
+        newUser["birth"]  = BsonDate(Clock.currTime);
+        newUser["mail"]   = _mail;
+        newUser["pwd"]    = toHexString(md5Of(_pwd)).toLower();
+        usersColl.insert(newUser);        
         
-        return getUser(_login);  
+        return getUser(_login);
+    }
+    
+    Bson authUser(ref Bson _user)
+    {                                        
+        _user["auth"] = true;
+        Bson req = Bson.emptyObject;
+        req["_id"] = _user["_id"].get!BsonObjectID;                
+        
+        usersColl.update(req, _user);
+        return usersColl.findOne(req);
     }
 }

@@ -3,5 +3,8 @@
 	"login" : "admin",
 	"name" : "Админ",
 	"rights" : "admin",
-	"pwd" : "21232f297a57a5a743894a0e4a801fc3"	
+	"mail" : "morhor@vivaldi.net",
+	"auth" : true,
+	"birth" : ISODate("2017-02-25T18:50:03.300Z"),
+	"pwd" : "21232f297a57a5a743894a0e4a801fc3"
 }
