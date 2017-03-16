@@ -5,7 +5,7 @@ __dummy.html
 *.obj
 __test__*__
 
-#custom
+
 bin/*
 *.out
 db/mongo-db/*

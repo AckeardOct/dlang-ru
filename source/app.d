@@ -11,11 +11,17 @@ void main()
     auto router = new URLRouter;
     router.registerWebInterface(new MainService);    
     router.get("*", serveStaticFiles("public/"));
+        
     
     auto settings = new HTTPServerSettings;
 	settings.port = port;
 	settings.bindAddresses = ["::1", ip];
     settings.sessionStore = new MemorySessionStore;
+    
+    settings.tlsContext = createTLSContext(TLSContextKind.server);
+    settings.tlsContext.useCertificateChainFile("ssl/server.crt");
+    settings.tlsContext.usePrivateKeyFile("ssl/server.key");
+    
 	listenHTTP(settings, router);
 
 	logInfo("Please open http://%s:%d/ in your browser.", ip, port);
