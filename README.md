@@ -1,7 +1,7 @@
 <h1>Веб сайт для последователей Dlang.</h1>
 <hr>
 <h3>Как запустить?</h3>
-<h5>Нужно иметь mongo и mongo-tools</h5>
+<h5>Нужно иметь mongo и mongo-tools, почтовый сервер (postfix)</h5>
 <ol>
   <li>$ git clone https://github.com/AckeardOct/dlang-ru.git </li>
   <li>
@@ -14,12 +14,16 @@
 <hr>
 <h3>Что реализовано?</h3>
 <ul>
+<<<<<<< HEAD
   <li>Регистрация и вход пользователей
   	<ul>
   		<li> Вход админа admin admin </li>
   	</ul>
   </li>
   <li> HTTPS (сертификат не достоверный) </li>
+=======
+  <li>Регистрация и вход пользователей через email (сообщения уходят в спам)</li>
+>>>>>>> aa7367fcfbe6b5e464ff7fd702700c0e4eefd6e0
 </ul>
 
 <h3>Ближашие планы</h3>
