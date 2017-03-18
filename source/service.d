@@ -9,7 +9,7 @@ import mailer;
 
 immutable string MAIL_DIR = "db/mail-templates/";
 immutable string MONGO_IP = "127.0.0.1";
-immutable string MAIL_SERVER = "localhost:25";
+immutable string MAIL_SERVER = "127.0.0.1:25";
 
 immutable string NOT_VALID_LOGIN = "Логин и пароль должен иметь не меньше 
                   3х символов и содержать 'A-z', '0-9', '-', '_'.";
