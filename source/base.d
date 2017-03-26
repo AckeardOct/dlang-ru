@@ -4,21 +4,46 @@ import std.stdio;
 import vibe.d;
 import core.stdc.stdlib : exit;
 
+import configurator;
+
+alias DataBase db;
+
 class DataBase
 {
+    static private DataBase singleton;
     private MongoClient db;
     private MongoCollection usersColl;
     
-    this(immutable string _ip)
+    private this()
     {
         try {
-            db = connectMongoDB(_ip);
+            db = connectMongoDB(cfg().mongoServer);
             usersColl  = db.getCollection("server.users");
             
+            // Default admin user
+            if(this.getUser("admin").isNull){
+                Bson newUser = Bson.emptyObject;
+                newUser["login"]  = "admin";
+                newUser["name"]   = "admin";
+                newUser["rights"] = "admin";
+                newUser["auth"]   = true;
+                newUser["birth"]  = BsonDate(Clock.currTime);
+                newUser["mail"]   = "admin@admin.ru";
+                newUser["pwd"]    = toHexString(md5Of("admin")).toLower();
+                usersColl.insert(newUser); 
+            }
+            
         } catch {
-            writeln("[ERROR] Can't connect to MongoDb by ip: ", _ip);
+            writeln("[ERROR] Can't connect to MongoDb by ip: ", cfg().mongoServer);
             exit(1);
         }
+    }
+    
+    static DataBase opCall()
+    {
+        if(!singleton)
+            singleton = new DataBase;
+         return singleton;
     }
     
     Bson getUser(immutable string _login)

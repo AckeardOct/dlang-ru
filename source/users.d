@@ -65,9 +65,9 @@ struct UserInfo
     
     void sendRegisterLink()
     {
-        string link = "http://127.0.0.1:8080/confirm/";
+        string link = "https://127.0.0.1:8080/confirm/";
         link ~= createRegisterCode();                
-        Mailer.get().sendRegisterLink(name, mail, link);
+        Mailer().sendRegisterLink(name, mail, link);
     }       
 }
 

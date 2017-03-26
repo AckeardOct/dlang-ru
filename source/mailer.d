@@ -6,24 +6,15 @@ import std.conv;
 import std.file;
 import std.stdio;
 
-immutable string ADDRESS = "no-reply@dlang.com";
-
-interface IMailer
-{    
-    void sendRegisterLink(string _name, string _mail, string _link);
-    static bool create(string _host, ushort _port);
-    static IMailer get();
-}
+import configurator : cfg;
 
 class MailTemplates
 {
-    private string dirPath;
     private string registration;
     
-    this(string _dirPath)
+    this()
     {
-        dirPath = _dirPath;
-        registration = readText(this.dirPath ~ "/registration.email");    
+        registration = readText(cfg().mailTemplates ~ "/registration.email");    
     }
     
     string getRegistrationText(string _name, string _link)
@@ -34,42 +25,30 @@ class MailTemplates
     }
 }
 
-unittest {
-    MailTemplates tmp = new MailTemplates("db/mail-templates/");
-    writeln(tmp.getRegistrationText("NAME", "LINK"));
-}
-
-class Mailer : IMailer
+class Mailer
 {
-    static private Mailer pointer = null;
-    static private MailTemplates mailTemplates = null;
+    static private Mailer singleton;
+    static private MailTemplates mailTemplates;
     static private SMTPClientSettings client;    
 	    
-    private this() { }
-    
-    static bool create(string _host, ushort _port, string _mailDir) {
-        if(!pointer) {
-            client = new SMTPClientSettings(_host, _port);
-            pointer = new Mailer;
-            mailTemplates = new MailTemplates(_mailDir);
-            return true;
-        }
-        else {
-            return false;
-        }
+    private this() 
+    {
+        client = new SMTPClientSettings(cfg().mailServer.ip, cfg().mailServer.port);
+        mailTemplates = new MailTemplates();
     }   
         
-    static IMailer get() 
+    static Mailer opCall()
     {
-        assert(pointer);
-        return pointer;
+        if(!singleton)
+            singleton = new Mailer;
+        return singleton;
     }
     
     void sendRegisterLink(string _name, string _mail, string _link)
 	{
        Mail email = new Mail;
-       email.headers["Sender"] = "REG BOT <" ~ADDRESS~ ">";
-       email.headers["From"] = "<" ~ADDRESS~ ">";
+       email.headers["Sender"] = "REG BOT <" ~ cfg().mailAddress ~ ">";
+       email.headers["From"] = "<" ~ cfg().mailAddress ~ ">";
 	   email.headers["To"] = "<" ~_mail~ ">";
 	   email.headers["Subject"] = "Registration Dlang.ru";
 	   email.headers["Content-Type"] = "text/html;charset=utf-8";       

@@ -1,0 +1,8 @@
+{
+	"webServer" : "127.0.0.1:8080",
+	"mongoServer" : "127.0.0.1",
+	"mailServer" : "127.0.0.1:25",
+	"mailAddress" : "no-reply@dlang.ru",
+	"mailTemplates" : "db/mail-templates",
+	"useHttps" : false
+}
