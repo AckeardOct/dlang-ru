@@ -6,7 +6,7 @@
 	<li>$ git clone https://github.com/AckeardOct/dlang-ru.git </li>
   <li>
   $ cd dlang-ru/db <br> 
-  $ ./docker-start.sh # запуск postfix и mongodb
+  $ ./docker-start.sh # запуск postfix и mongodb <br>
   $ cd ../
   <li> $ dub </li>
 </ol>
