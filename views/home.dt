@@ -4,3 +4,4 @@ block head
 	-string title = "Главная";
 
 block contents	
+	h1 LOL

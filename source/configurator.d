@@ -50,7 +50,7 @@ class Configurator
         mailAddress = j["mailAddress"].str;
         mailTemplates = j["mailTemplates"].str;
         useHttps = (j["useHttps"].type() == JSON_TYPE.TRUE ? true : false);
-        writeln("Bool: ", useHttps == true);
+        //writeln("Bool: ", useHttps == true);
     }
     
     static Configurator opCall()
@@ -68,7 +68,7 @@ class Configurator
         ret ~= "mailServer: " ~ mailServer.toString() ~ "\n";
         ret ~= "mailAddress: " ~ mailAddress ~ "\n";
         ret ~= "mailTemplates: " ~ mailTemplates ~ "\n";
-        ret ~= "useHttps: " ~ useHttps ~ "\n";
+        ret ~= "useHttps: " ~ (useHttps ? "true" : "false") ~ "\n";
         return ret;
     }
 }

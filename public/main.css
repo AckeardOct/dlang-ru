@@ -1,0 +1,12 @@
+.head {
+	background-color: #B03931;
+	vertical-align: center;
+	font-size: 38px;
+	
+}
+
+.head a {
+	color: white;
+	text-decoration: none;
+	padding: 10px;
+}

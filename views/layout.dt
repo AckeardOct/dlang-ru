@@ -1,17 +1,22 @@
 doctype html
 html
 	head
+		link(href="/main.css", rel="stylesheet")
 		block head
 			-string title = "Layout";
 		title #{title} : Dlang
 	body
-		ul
-			li <a href="/">Главная</a>
-			li <a href="/user">#{ui.name}</a>
+		.head
+			a(href="/")
+				img(src="/images/dlogo.svg")
+			a(href="/") Главная
+			a(href="/") Форум
 			-if(ui.logined)
-				li <a href="/logout">Выход</a>
+				a(href="/user") #{ui.name}
+				a(href="/logout") Выход
 			-else
-				li <a href="/register">Регистрация</a>
+				a(href="/user") Вход
+				a(href="/register") Регистрация
 		hr
 		h1 #{title}
 		block contents
